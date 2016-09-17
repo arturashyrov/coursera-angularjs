@@ -29,7 +29,11 @@ function LunchCheckController($scope, $filter) {
 
   $scope.checkLunch = function() {
     var parsedLunchItems = parseLunchItems($scope.lunchItems);
-    $scope.lunchCheckStatus = parsedLunchItems.length > 3 ? checkStatuses.fail : checkStatuses.ok;
+    if(parsedLunchItems.length == 0) {
+      $scope.lunchCheckStatus = checkStatuses.default;
+    } else {
+      $scope.lunchCheckStatus = parsedLunchItems.length > 3 ? checkStatuses.fail : checkStatuses.ok;
+    }
   }
 };
 
