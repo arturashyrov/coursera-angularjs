@@ -6,22 +6,35 @@
     <link rel="stylesheet" href="styles/bootstrap.min.css">
     <style>
       .message { font-size: 1.3em; font-weight: bold; }
+      .validation-error {
+        color: red;
+        border: 1px solid red;
+      }
+      .validation-ok {
+        color: green;
+        border: 1px solid green;
+      }
     </style>
   </head>
-<body>
-   <div class="container">
+  <script type="text/javascript" src="angular.min.js"></script>
+  <script type="text/javascript" src="app.js"></script>
+<body ng-app="LunchCheck">
+   <div class="container" ng-controller="LunchCheckController">
      <h1>Lunch Checker</h1>
 
          <div class="form-group">
              <input id="lunch-menu" type="text"
-             placeholder="list comma separated dishes you usually have for lunch"
-             class="form-control">
+             placeholder="list comma separated dishes you usually have for lunch. Empty elements are not considered"
+             class="form-control"
+             ng-model="lunchItems">
          </div>
          <div class="form-group">
-             <button class="btn btn-default">Check If Too Much</button>
+             <button class="btn btn-default" ng-click="checkLunch()">Check If Too Much</button>
          </div>
-         <div class="form-group message">
-           <!-- Your message can go here. -->
+         <div class="form-group message"
+         ng-class="lunchCheckStatus.class"
+         >
+           {{lunchCheckStatus.text}}
          </div>
    </div>
 
